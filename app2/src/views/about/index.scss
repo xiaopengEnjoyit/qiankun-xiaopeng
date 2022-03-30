@@ -1,0 +1,10 @@
+.form-wrap{
+  display: flex;
+  &-item{
+    width: 50%;
+  }
+  &-params{
+    flex: 1;
+    margin-left: 20px;
+  }
+}

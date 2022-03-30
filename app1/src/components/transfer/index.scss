@@ -1,0 +1,23 @@
+.transfer {
+  height: 100%;
+  &-body {
+    display: flex;
+    height: 500px;
+    justify-content: space-between;
+
+    &-left {
+      flex: 1;
+    }
+
+    &-right {
+      flex: 1;
+      margin-left: 16px;
+    }
+  }
+
+  &-footer {
+    display: flex;
+    padding-top: 32px;
+    justify-content: flex-end;
+  }
+}
