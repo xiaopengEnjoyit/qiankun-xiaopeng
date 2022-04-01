@@ -12,7 +12,7 @@
 import { cloneDeep } from 'lodash'
 import { flatten, treeFormat } from '../../utils'
 export default {
-  name: 'anso-tree',
+  name: 'AnsoTree',
   props: {
     treeEvent: {
       type: Object,

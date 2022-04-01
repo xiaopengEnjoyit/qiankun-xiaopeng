@@ -40,6 +40,40 @@ export const NAVBAR_MENUS = [
         permissionsName: ''
       }
     ]
+  },
+  {
+    name: 'app3',
+    entry: '//localhost:9999',
+    activeRule: 'app3',
+    title: '应用三',
+    children: [
+      {
+        name: '菜单一',
+        index: '/app3/home',
+        icon: 'el-icon-menu',
+        permissionsName: ''
+      },
+      {
+        name: '菜单二',
+        index: '/app3/about',
+        icon: 'el-icon-menu',
+        permissionsName: ''
+      }
+    ]
+  },
+  {
+    name: 'app4',
+    entry: '//localhost:8088',
+    activeRule: 'app4',
+    title: '应用4',
+    children: [
+      {
+        name: '菜单一',
+        index: '/app4/login',
+        icon: 'el-icon-menu',
+        permissionsName: ''
+      }
+    ]
   }
 ]
 // export function asyncApps() {

@@ -33,7 +33,8 @@ import {
   Dialog,
   Popconfirm,
   Scrollbar,
-  Link
+  Link,
+  Tree
 } from 'element-ui'
 export default {
   components: [
@@ -70,7 +71,8 @@ export default {
     Dialog,
     Popconfirm,
     Scrollbar,
-    Link
+    Link,
+    Tree
   ],
   install(Vue) {
     Vue.prototype.$alert = MessageBox.alert

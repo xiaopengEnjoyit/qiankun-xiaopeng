@@ -40,6 +40,7 @@
 import transferTable from './transfer-table'
 import { DataBus } from 'comm/src/utils'
 export default {
+  name: 'Transfer',
   components: {
     transferTable
   },
