@@ -74,6 +74,20 @@ export const NAVBAR_MENUS = [
         permissionsName: ''
       }
     ]
+  },
+  {
+    name: 'app5',
+    entry: '//localhost:9998',
+    activeRule: 'app5',
+    title: '应用5',
+    children: [
+      {
+        name: '菜单一',
+        index: '/app5/home',
+        icon: 'el-icon-menu',
+        permissionsName: ''
+      }
+    ]
   }
 ]
 // export function asyncApps() {
