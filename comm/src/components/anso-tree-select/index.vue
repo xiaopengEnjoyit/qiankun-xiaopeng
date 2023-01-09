@@ -15,6 +15,17 @@
      *            </ansoTreeSelect>
      */
 -->
+  <!--
+  /**
+  *修改人：qbh
+  *修改时间：2022.4.14
+  *修改内容：1.el-tree组件增加slot，自定义文本。2.node-click中增加disabled禁用判断
+  *修改原因：1.解决单选树禁用（disabled）无效问题。2.解决单选，选择父节点，下面的子节点也会高亮问题。
+  *
+  *2022.4.19  修改watch中value监听，增加 multiple 为true判断。解决多选时点击选中会收起整棵树的bug，多选时不能重新加载整棵树。（暂未发现其他影响）
+  *2022.5.7 el-tree标签添加:class="cusClass"自定义class，用于解决多选时需要设置自定义高度的情况（防止下拉框挡住弹框的确认按钮）
+   */
+ -->
   <el-select
     v-model="selectData"
     ref="treeSelect"
@@ -26,9 +37,10 @@
     :placeholder="selectPlaceHolder"
     :disabled="disabled"
     @clear="clearHandle"
+    @change="$emit('change')"
     class="tree-select"
   >
-    <el-input :size="size" class="selectInput" :placeholder="placeholder" v-model="filterText" clearable></el-input>
+    <el-input :size="size" class="select-input" :placeholder="placeholder" v-model="filterText" clearable></el-input>
     <!-- <el-option hidden :value="options[0].value" :label="options[0].label" class="options"></el-option> -->
     <template v-for="item in options">
       <el-option hidden :key="item.value" :label="item.label" :value="item.value"></el-option>
@@ -36,11 +48,13 @@
     <el-tree
       id="tree-option"
       ref="selectTree"
+      :class="cusClass"
       :accordion="accordion"
       :data="treeData"
       :props="props"
       :show-checkbox="multiple"
       :check-on-click-node="multiple"
+      :expand-on-click-node="expandOnClickNode"
       :check-strictly="checkStrictly"
       :node-key="props.value"
       :default-expanded-keys="defaultExpandedKey"
@@ -48,7 +62,15 @@
       :filter-node-method="filterNode"
       @node-click="handleNodeClick"
       @check-change="handleCheckChange"
-    ></el-tree>
+    >
+      <div
+        :class="['custom-tree-node', data.disabled ? 'is_disabled' : '']"
+        :title="data[props.label]"
+        slot-scope="{ data }"
+      >
+        <span :class="[data.class ? data.class : '', 'custom-tree-node-label']">{{ data[props.label] }}</span>
+      </div>
+    </el-tree>
   </el-select>
 </template>
 
@@ -91,6 +113,17 @@ export default {
         return true
       }
     },
+    /* tree自定义class，用于解决需要设置自定义高度的情况 */
+    cusClass: {
+      type: String,
+      default: ''
+    },
+    defaultExpandedKey: {
+      type: Array,
+      default() {
+        return []
+      }
+    },
     selectWidth: {
       type: String,
       default: ''
@@ -100,6 +133,12 @@ export default {
       type: Boolean,
       default: () => {
         return false
+      }
+    },
+    expandOnClickNode: {
+      type: Boolean,
+      default: () => {
+        return true
       }
     },
     disabled: {
@@ -147,7 +186,7 @@ export default {
       filterText: '',
       selectData: undefined, // 选中的节点
       defaultValue: this.value, // 初始值
-      defaultExpandedKey: [],
+      // defaultExpandedKey: [],
       treeData: [],
       options: [
         {
@@ -159,7 +198,6 @@ export default {
   },
   mounted() {
     this.initCheckedData()
-    console.log(this.selectData)
   },
   methods: {
     /**
@@ -187,6 +225,8 @@ export default {
       process.nextTick(() => {
         if (this.multiple) {
           // 多选
+          // 表格中多选时，传了value=[],这里依然进入下面的提示，所以加了this.defaultValue = this.value || []
+          this.defaultValue = this.value || []
           if (!Array.isArray(this.defaultValue)) {
             throw new Error('anso-tree-select当前为多选， v-model请传数组')
           }
@@ -209,10 +249,14 @@ export default {
         }
         this.selectData = this.defaultValue
       })
-      this.initScroll()
+      // this.initScroll()
     },
     /**
      * @description: 初始化滚动条
+     * 修改人：钱保华
+     * 修改时间：2022.5.25
+     * 修改原因：ele.style.width = 0这里会导致所有这种下拉框的滚动条消失
+     * 修改内容：注释scrollBar.forEach(ele => (ele.style.width = 0))
      * @param {*}
      * @return {*}
      */
@@ -220,13 +264,14 @@ export default {
     initScroll() {
       this.$nextTick(() => {
         let scrollWrap = document.querySelectorAll('.el-scrollbar .el-select-dropdown__wrap')[0]
-        let scrollBar = document.querySelectorAll('.el-scrollbar .el-scrollbar__bar')
+        // let scrollBar = document.querySelectorAll('.el-scrollbar .el-scrollbar__bar')
         scrollWrap.style.cssText = 'margin: 0px; max-height: none; overflow: hidden;'
-        scrollBar.forEach((ele) => (ele.style.width = 0))
+        // scrollBar.forEach(ele => (ele.style.width = 0))
       })
     },
     /**
      * @description:  单选，节点被点击时的回调,返回被点击的节点数据
+     * 如果是禁用节点，则不做操作，并且再次高亮之前的选择
      * @param {*} data
      * @param {*} node
      * @return {*}
@@ -234,10 +279,20 @@ export default {
 
     handleNodeClick(data, node) {
       if (!this.multiple) {
-        this.setSelectOption(node)
-        this.$emit('change', this.selectData, data)
+        if (data.disabled) {
+          this.$refs.selectTree.setCurrentKey(this.selectData)
+        } else {
+          this.setSelectOption(node)
+          this.$emit('change', this.selectData, data)
+        }
       }
     },
+    // 当前选中项变化触发，目前只用于多选
+    // currentChange(data, node) {
+    //   if (this.multiple) {
+    //     this.$emit('currentChange', data, node)
+    //   }
+    // },
     /**
      * @description: 清除选中
      * @param {*}
@@ -261,7 +316,7 @@ export default {
     /*  */
     clearSelected() {
       let allNode = document.querySelectorAll('#tree-option .el-tree-node')
-      allNode.forEach((element) => element.classList.remove('is-current'))
+      allNode.forEach(element => element.classList.remove('is-current'))
     },
     /**
      * @description: 单选时点击tree节点，设置select选项
@@ -295,19 +350,19 @@ export default {
      * @return {*}
      */
 
-    handleCheckChange() {
+    handleCheckChange(data, ck) {
       let checkedKeys = this.$refs.selectTree.getCheckedKeys() // 所有被选中的节点的 key 所组成的数组数据
-      this.options = checkedKeys.map((item) => {
+      this.options = checkedKeys.map(item => {
         let node = this.$refs.selectTree.getNode(item) // 所有被选中的节点对应的node
         let tmpMap = {}
         tmpMap.value = node.key
         tmpMap.label = node.label
         return tmpMap
       })
-      this.selectData = this.options.map((item) => {
+      this.selectData = this.options.map(item => {
         return item.value
       })
-      this.$emit('change', this.selectData, this.options)
+      this.$emit('change', this.selectData, this.options, data, ck)
     },
     /**
      * @description: 多选，勾选上传进来的节点
@@ -325,6 +380,7 @@ export default {
      */
 
     clearSelectedNode() {
+      if (!this.$refs.selectTree) return
       this.selectedData = ''
       this.$refs.selectTree.setCurrentKey(null)
     },
@@ -335,6 +391,7 @@ export default {
      */
 
     clearSelectedNodes() {
+      if (!this.$refs.selectTree) return
       let checkedKeys = this.$refs.selectTree.getCheckedKeys() // 所有被选中的节点的 key 所组成的数组数据
       for (let i = 0; i < checkedKeys.length; i++) {
         this.$refs.selectTree.setChecked(checkedKeys[i], false)
@@ -354,16 +411,37 @@ export default {
   },
   watch: {
     /**
+     * @description: nothave改变了，没有触发显示隐藏  --无--
+     * 动态增减带有此下拉项的表单时，this.$set(this.formList[0], 'nothave', true) 写法无效，所以加了一个nothave的监听
+     * @param {*} n
+     * @param {*} o
+     * @return {*}
+     */
+    nothave(n, o) {
+      this.initCheckedData()
+    },
+    /**
      * @description:
      * @param {*} val
      * @return {*}
      */
 
-    value(val) {
-      this.defaultValue = val
-      this.$nextTick(() => {
-        this.initCheckedData()
-      })
+    value: {
+      handler(val) {
+        if (this.multiple && val.length > 0) {
+          this.selectData = val
+        }
+        if (!this.multiple && val) {
+          this.selectData = val
+        }
+        this.defaultValue = val
+        this.$nextTick(() => {
+          if (!this.multiple) {
+            this.initCheckedData()
+          }
+        })
+      },
+      immediate: true
     },
     /**
      * @description:
@@ -372,6 +450,7 @@ export default {
      */
 
     filterText(val) {
+      this.filterText = val.replace(/[#$%<>&\\*\s]/g, '')
       this.$refs.selectTree.filter(val)
     },
     /**

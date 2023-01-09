@@ -1,0 +1,50 @@
+section {
+  padding-bottom: 16px;
+  border-bottom: 1px solid #e5e5e5;
+  &:last-child {
+    border: 0;
+  }
+}
+p {
+  margin: 0;
+  color: #262626;
+  font-size: 14px;
+  margin-bottom: 0px;
+  font-weight: 500;
+}
+.info-title {
+  margin-top: 16px;
+}
+.el-row {
+  > div {
+    margin-top: 16px;
+    height: 16px;
+    line-height: 16px;
+    span {
+      font-size: 12px;
+      color: #262626;
+      &:last-child {
+        color: #626262;
+      }
+    }
+    .info-tips {
+      max-width: 400px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      display: -webkit-box !important;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 1;
+      word-wrap: break-word;
+      word-break: break-all;
+    }
+
+    .el-image {
+      width: 88px;
+      height: 88px;
+      margin: 16px 16px 0 0;
+    }
+  }
+}
+.anso-dialog.el-dialog{
+  max-height: 700px;
+}

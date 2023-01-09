@@ -1,0 +1,154 @@
+/deep/.el-loading-spinner .el-loading-text {
+    color: #262626 ;
+    font-size: 12px ;
+    margin-top: 13px ;
+  }
+  .imt_start {
+    padding: 0 8px;
+    font-size: 14px;
+    font-weight: 400;
+    .import__btn {
+      position: absolute;
+      bottom: 20px;
+    }
+    .imt_noDown {
+      height:138px !important;
+    }
+    .imt-tips {
+      display: flex;
+      margin-bottom: 16px;
+      i {
+        color: #FF4D4F;
+        margin-right: 8px;
+        margin-top: 4px;
+      }
+      span{
+        color: #8c8c8c;
+      }
+    }
+    .imt-loading {
+      height: 164px;
+      // /deep/.el-loading-spinner .circular {
+      //   height: 34px;
+      //   width: 34px;
+      // }
+    }
+    .tab__footer {
+      p {
+        font-size: 12px;
+        color: #8c8c8c;
+        margin: 0;
+        line-height: 12px;
+      }
+      /deep/.el-upload-dragger {
+        background-color: #F9F9F9;
+        height: 192px;
+      }
+      /deep/.el-upload-dragger .load-icon {
+        display: inline-block;
+        margin: 48px 0 16px;
+        font-size: 42px;
+        color: #3171F2;
+        line-height: 42px;
+      }
+      /deep/.el-upload__text {
+        color: #262626;
+        margin-bottom: 10px;
+        line-height: 14px;
+      }
+    }
+    .imt_file {
+      border: 1px dashed #d9d9d9;
+      border-radius: 6px;
+      box-sizing: border-box;
+      text-align: center;
+      cursor: pointer;
+      overflow: hidden;
+      height: 192px;
+      background-color: #F9F9F9;
+      cursor: default;
+      em {
+        display: inline-block;
+        margin: 36px 0 16px;
+        font-size: 53px;
+        color: #119073;
+        line-height: 53px;
+        font-style: normal;
+      }
+      h1 {
+        font-size: 16px;
+        font-weight: 500;
+        color: #262626;
+        line-height: 16px;
+        margin: 0 0 12px 0;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+      p {
+        font-size: 14px;
+        font-weight: 400;
+        color: #8c8c8c;
+        margin: 0;
+      }
+  
+      .upload-btn {
+        position: absolute;
+      }
+    }
+    .imt-doing {
+      height: 192px;
+      padding-left: 31px;
+      p {
+        margin: 32px 0 16px 0;
+      }
+      /deep/.el-progress-bar__outer {
+        background-color: #e5e5e5;
+      }
+    }
+    .imt-sus {
+      box-sizing: border-box;
+      text-align: center;
+      cursor: pointer;
+      overflow: hidden;
+      height: 160px;
+      background-color: #fff;
+      cursor: default;
+      border: none;
+      em {
+        color: #52C41A;
+        margin: 16px 0;
+        font-size: 54px;
+  
+      }
+    }
+    .imt-error {
+      box-sizing: border-box;
+      text-align: center;
+      cursor: pointer;
+      overflow: hidden;
+      // height: 160px;
+      background-color: #fff;
+      cursor: default;
+      border: none;
+      em {
+        color: #FF4D4F;
+        margin: 16px 0;
+        font-size: 54px;
+  
+      }
+    }
+    a{
+      margin-top: 24px;
+      display: inline-block;
+    }
+  }
+  .up-btn {
+    display: none;
+  }
+  /deep/.el-icon-loading {
+    font-size: 34px;
+  }
+  /deep/.el-upload-dragger {
+    width: 419px;
+  }

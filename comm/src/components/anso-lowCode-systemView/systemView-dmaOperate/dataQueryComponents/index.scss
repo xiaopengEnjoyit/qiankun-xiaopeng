@@ -1,0 +1,72 @@
+
+.slot-left-top {
+    height: 100%;
+    padding: 0 20px;
+    .top-title {
+      width: 100%;
+      padding-top: 16px;
+      display: flex;
+      align-items: center;
+      .top-title-objName {
+        color: #262626;
+        font-size: 16px;
+        font-weight: 600;
+      }
+      .top-title-objType {
+        background: rgba(82, 196, 26, 0.1);
+        border-radius: 2px;
+        font-weight: 500;
+        text-align: left;
+        color: #52c41a;
+        font-size: 12px;
+        padding: 0px 10px;
+        margin-left: 8px;
+      }
+    }
+    .anso-tabs-con {
+      height: calc(100% - 100px);
+    }
+    /deep/.el-date-editor {
+      &.el-input__inner {
+        width: 230px;
+        .el-range-separator {
+          line-height: 20px;
+        }
+      }
+    }
+}
+.slot-left-Bottom {
+  height: 100%;
+  padding: 0 15px;
+  /deep/.container-fluid {
+    padding-top: 10px;
+    height: calc(100% - 26px);
+    overflow: auto;
+  }
+}
+.slot-right {
+  height: 100%;
+}
+/deep/.container-fluid {
+  height: calc(100% - 20px);
+  .container-echarts {
+    height: 100%;
+    padding: 0;
+    position: relative;
+    .echarts-container {
+      padding-top: 16px;
+      height: calc(100% - 60px);
+      .chart {
+        height: 100%;
+      }
+    }
+  }
+}
+/deep/.anso-table-tab {
+  height: calc(100% - 20px);
+  padding-top: 16px;
+  box-sizing: border-box;
+}
+/deep/.el-table th.el-table__cell{
+  user-select: initial;
+}

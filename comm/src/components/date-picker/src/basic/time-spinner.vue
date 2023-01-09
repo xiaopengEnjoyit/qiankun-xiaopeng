@@ -221,8 +221,8 @@ export default {
     },
 
     bindScrollEvent() {
-      const bindFuntion = (type) => {
-        this.$refs[type].wrap.onscroll = (e) => {
+      const bindFuntion = type => {
+        this.$refs[type].wrap.onscroll = e => {
           // TODO: scroll is emitted when set scrollTop programatically
           // should find better solutions in the future!
           this.handleScroll(type, e)
@@ -303,10 +303,10 @@ export default {
       return content
     },
     typeItemHeight(type) {
-      return this.$refs[type].$el.querySelector('li').offsetHeight
+      return this.$refs[type].$el.querySelector('li')?.offsetHeight
     },
     scrollBarHeight(type) {
-      return this.$refs[type].$el.offsetHeight
+      return this.$refs[type].$el?.offsetHeight
     }
   }
 }

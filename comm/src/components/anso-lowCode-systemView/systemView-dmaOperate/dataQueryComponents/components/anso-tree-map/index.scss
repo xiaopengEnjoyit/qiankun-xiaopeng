@@ -1,0 +1,67 @@
+.anso-tree-map {
+  height: 100%;
+  /deep/.tab-list-wrap{
+    .el-tabs__nav-scroll{
+      text-align: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+  /deep/.anso-tree-con {
+    height: calc(100% - 60px);
+    .anso-tree-select {
+      .el-select {
+        width: 100%;
+        .el-input__icon{
+          line-height: 28px;
+        }
+      }
+    }
+    .menu_tree_type {
+      display: flex;
+      align-items: center;
+      padding-bottom: 10px;
+      .tree_type_title{
+          color: #8C8C8C;
+      }
+      >div{
+          margin-right: 8px;
+          padding: 0 8px;
+          font-size: 12px;
+          border-radius: 2px;
+      }
+    }
+    .anso-tree-search {
+      .el-autocomplete {
+        width: 100%;
+      }
+    }
+    .anso-tree-wrap{
+      .anso-tree{
+        padding: 16px;
+      }
+      .icon-wrap{
+          display: none;
+      }
+  }
+  }
+  .isCollapseGroup {
+    width: 100%;
+    padding: 0 16px;
+    box-sizing: border-box;
+
+    /deep/ .el-radio-button {
+      width: 50%;
+      display: inline-block;
+
+      .el-radio-button__inner {
+        width: 100%;
+      }
+    }
+  }
+  .anso-map-con{
+    padding: 10px 16px;
+    height: calc(100% - 60px);
+  }
+}

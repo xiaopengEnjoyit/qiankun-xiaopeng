@@ -13,7 +13,7 @@
     @focus="handleFocus"
     @keydown.native="handleKeydown"
     :value="displayValue"
-    @input="(value) => (userInput = value)"
+    @input="value => (userInput = value)"
     @change="handleChange"
     @mouseenter.native="handleMouseEnter"
     @mouseleave.native="showClose = false"
@@ -46,7 +46,7 @@
     v-clickoutside="handleClose"
     v-else
   >
-  <i :class="['el-input__icon', 'el-range__icon', triggerClass]"></i>
+    <i :class="['el-input__icon', 'el-range__icon', triggerClass]"></i>
     <div class="prefixText-wrap" v-show="prefixText">
       <span class="prefixText">{{ prefixText }}</span>
       <span class="prefixText-line">|</span>
@@ -141,15 +141,15 @@ const HAVE_TRIGGER_TYPES = [
   'datetimerange',
   'dates'
 ]
-const DATE_FORMATTER = function (value, format) {
+const DATE_FORMATTER = function(value, format) {
   if (format === 'timestamp') return value.getTime()
   return formatDate(value, format)
 }
-const DATE_PARSER = function (text, format) {
+const DATE_PARSER = function(text, format) {
   if (format === 'timestamp') return new Date(Number(text))
   return parseDate(text, format)
 }
-const RANGE_FORMATTER = function (value, format) {
+const RANGE_FORMATTER = function(value, format) {
   if (Array.isArray(value) && value.length === 2) {
     const start = value[0]
     const end = value[1]
@@ -160,7 +160,7 @@ const RANGE_FORMATTER = function (value, format) {
   }
   return ''
 }
-const RANGE_PARSER = function (array, format, separator) {
+const RANGE_PARSER = function(array, format, separator) {
   if (!Array.isArray(array)) {
     array = array.split(separator)
   }
@@ -255,10 +255,10 @@ const TYPE_VALUE_RESOLVER_MAP = {
   },
   dates: {
     formatter(value, format) {
-      return value.map((date) => DATE_FORMATTER(date, format))
+      return value.map(date => DATE_FORMATTER(date, format))
     },
     parser(value, format) {
-      return (typeof value === 'string' ? value.split(', ') : value).map((date) =>
+      return (typeof value === 'string' ? value.split(', ') : value).map(date =>
         date instanceof Date ? date : DATE_PARSER(date, format)
       )
     }
@@ -290,9 +290,9 @@ const formatAsFormatAndType = (value, customFormat, type) => {
  *   2. date string
  *   3. array of 1 or 2
  */
-const valueEquals = function (a, b) {
+const valueEquals = function(a, b) {
   // considers Date object and string
-  const dateEquals = function (a, b) {
+  const dateEquals = function(a, b) {
     const aIsDate = a instanceof Date
     const bIsDate = b instanceof Date
     if (aIsDate && bIsDate) {
@@ -318,11 +318,11 @@ const valueEquals = function (a, b) {
   return false
 }
 
-const isString = function (val) {
+const isString = function(val) {
   return typeof val === 'string' || val instanceof String
 }
 
-const validator = function (val) {
+const validator = function(val) {
   // either: String, Array of String, null / undefined
   return (
     val === null ||
@@ -446,7 +446,7 @@ export default {
 
   computed: {
     ranged() {
-      return this?.type.indexOf('range') > -1 
+      return this?.type.indexOf('range') > -1
     },
 
     reference() {
@@ -534,7 +534,7 @@ export default {
 
       // NOTE: deal with common but incorrect usage, should remove in next major version
       // user might provide string / timestamp without value-format, coerce them into date (or array of date)
-      return Array.isArray(this.value) ? this.value.map((val) => new Date(val)) : new Date(this.value)
+      return Array.isArray(this.value) ? this.value.map(val => new Date(val)) : new Date(this.value)
     },
 
     _elFormItemSize() {
@@ -593,7 +593,7 @@ export default {
     },
 
     blur() {
-      this.refInput.forEach((input) => input.blur())
+      this.refInput.forEach(input => input.blur())
     },
 
     // {parse, formatTo} Value deals maps component value with internal Date
@@ -832,7 +832,7 @@ export default {
       this.picker.selectionMode = this.selectionMode
       this.picker.unlinkPanels = this.unlinkPanels
       this.picker.arrowControl = this.arrowControl || this.timeArrowControl || false
-      this.$watch('format', (format) => {
+      this.$watch('format', format => {
         this.picker.format = format
       })
 
@@ -843,7 +843,7 @@ export default {
           const parser = TYPE_VALUE_RESOLVER_MAP.datetimerange.parser
           const format = DEFAULT_FORMATS.timerange
           ranges = Array.isArray(ranges) ? ranges : [ranges]
-          this.picker.selectableRange = ranges.map((range) => parser(range, format, this.rangeSeparator))
+          this.picker.selectableRange = ranges.map(range => parser(range, format, this.rangeSeparator))
         }
         for (const option in options) {
           if (
@@ -874,7 +874,7 @@ export default {
       })
       // todo: myedit
       this.picker.$on('getPrefixText', (text = '') => {
-        this.prefixText = text
+        this.prefixText = '' //text  这里置空是为了解决，重置的时候，输入框前面的文字不会重置的bug，如果有可以动态控制的办法，可以改。
       })
       this.picker.$on('select-range', (start, end, pos) => {
         if (this.refInput.length === 0) return

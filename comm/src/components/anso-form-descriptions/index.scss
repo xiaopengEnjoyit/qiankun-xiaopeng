@@ -1,0 +1,23 @@
+.anso-form-descriptions {
+  /deep/.el-descriptions .is-bordered td,
+  .el-descriptions .is-bordered th {
+    // padding: 0 12px;
+    .el-form-item {
+      margin: 0;
+      .el-form-item__error {
+        top: 80%;
+      }
+    }
+  }
+}
+.anso-form-descriptions-no-err {
+  /deep/.el-descriptions .is-bordered td,
+  .el-descriptions .is-bordered th {
+    // padding: 0 12px;
+    .el-form-item {
+      .el-form-item__error {
+        display: none;
+      }
+    }
+  }
+}

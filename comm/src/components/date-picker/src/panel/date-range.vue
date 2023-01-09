@@ -35,8 +35,8 @@
                   :placeholder="t('el.datepicker.startDate')"
                   class="el-date-range-picker__editor"
                   :value="minVisibleDate"
-                  @input="(val) => handleDateInput(val, 'min')"
-                  @change="(val) => handleDateChange(val, 'min')"
+                  @input="val => handleDateInput(val, 'min')"
+                  @change="val => handleDateChange(val, 'min')"
                 />
               </span>
               <span class="el-date-range-picker__time-picker-wrap" v-clickoutside="handleMinTimeClose">
@@ -47,8 +47,8 @@
                   :placeholder="t('el.datepicker.startTime')"
                   :value="minVisibleTime"
                   @focus="minTimePickerVisible = true"
-                  @input="(val) => handleTimeInput(val, 'min')"
-                  @change="(val) => handleTimeChange(val, 'min')"
+                  @input="val => handleTimeInput(val, 'min')"
+                  @change="val => handleTimeChange(val, 'min')"
                 />
                 <time-picker
                   ref="minTimePicker"
@@ -69,8 +69,8 @@
                   :placeholder="t('el.datepicker.endDate')"
                   :value="maxVisibleDate"
                   :readonly="!minDate"
-                  @input="(val) => handleDateInput(val, 'max')"
-                  @change="(val) => handleDateChange(val, 'max')"
+                  @input="val => handleDateInput(val, 'max')"
+                  @change="val => handleDateChange(val, 'max')"
                 />
               </span>
               <span class="el-date-range-picker__time-picker-wrap" v-clickoutside="handleMaxTimeClose">
@@ -82,8 +82,8 @@
                   :value="maxVisibleTime"
                   :readonly="!minDate"
                   @focus="minDate && (maxTimePickerVisible = true)"
-                  @input="(val) => handleTimeInput(val, 'max')"
-                  @change="(val) => handleTimeChange(val, 'max')"
+                  @input="val => handleTimeInput(val, 'max')"
+                  @change="val => handleTimeChange(val, 'max')"
                 />
                 <time-picker
                   ref="maxTimePicker"
@@ -226,7 +226,7 @@ import DateTable from '../basic/date-table'
 import ElInput from 'element-ui/packages/input'
 import ElButton from 'element-ui/packages/button'
 
-const calcDefaultValue = (defaultValue) => {
+const calcDefaultValue = defaultValue => {
   if (Array.isArray(defaultValue)) {
     return [new Date(defaultValue[0]), new Date(defaultValue[1])]
   } else if (defaultValue) {
@@ -556,7 +556,7 @@ export default {
             parsedValue.getMinutes(),
             parsedValue.getSeconds()
           )
-          this.$nextTick((_) => this.$refs.minTimePicker.adjustSpinners())
+          this.$nextTick(_ => this.$refs.minTimePicker.adjustSpinners())
         } else {
           this.maxDate = modifyTime(
             this.maxDate,
@@ -564,7 +564,7 @@ export default {
             parsedValue.getMinutes(),
             parsedValue.getSeconds()
           )
-          this.$nextTick((_) => this.$refs.maxTimePicker.adjustSpinners())
+          this.$nextTick(_ => this.$refs.maxTimePicker.adjustSpinners())
         }
       }
     },
@@ -749,7 +749,11 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-.el-picker-panel__shortcut{
+.el-picker-panel__sidebar {
+  @include special-scroll();
+  height: calc(100% - 39px);
+}
+.el-picker-panel__shortcut {
   text-align: center !important;
 }
 </style>

@@ -1,0 +1,82 @@
+.desc-img {
+    width: 16px;
+    height: 16px;
+}
+.desc-title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    p {
+        margin: 0;
+        font-size: 16px;
+        font-weight: 500;
+    }
+    &-save{
+        display: flex;
+        align-items: center;
+    }
+}
+.desc-con {
+    margin: 16px 0 18px 0;
+}
+.desc-bottom {
+    padding-bottom: 32px;
+    border-bottom: 1px dashed #e5e5e5;
+}
+.line1 {
+overflow:hidden;
+text-overflow:ellipsis;
+display:-webkit-box !important;
+-webkit-box-orient:vertical;
+-webkit-line-clamp:1; 
+word-wrap: break-word;
+}
+.line2 {
+overflow:hidden;
+text-overflow:ellipsis;
+display:-webkit-box !important;
+-webkit-box-orient:vertical;
+-webkit-line-clamp:2; 
+word-wrap: break-word;
+}
+.line3 {
+overflow:hidden;
+text-overflow:ellipsis;
+display:-webkit-box !important;
+-webkit-box-orient:vertical;
+-webkit-line-clamp:3; 
+word-wrap: break-word;
+}
+.line4 {
+overflow:hidden;
+text-overflow:ellipsis;
+display:-webkit-box !important;
+-webkit-box-orient:vertical;
+-webkit-line-clamp:4; 
+word-wrap: break-word;
+}
+.line5 {
+overflow:hidden;
+text-overflow:ellipsis;
+display:-webkit-box !important;
+-webkit-box-orient:vertical;
+-webkit-line-clamp:5; 
+word-wrap: break-word;
+}
+/deep/.el-descriptions-item__label.is-bordered-label {
+    font-weight: 400;
+    color:#8c8c8c;
+    width: 20%;
+    max-width: 150px;
+    text-align: right;
+    background: #f9f9f9;
+}
+/deep/.el-descriptions__body table td {
+    max-width: 150px;
+    word-wrap: break-word;
+    height: 30px;
+    line-height: 30px;
+} 
+/deep/.el-descriptions--mini.is-bordered td {
+    padding: 0 16px !important;
+}

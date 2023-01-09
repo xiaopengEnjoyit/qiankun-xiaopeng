@@ -1,53 +1,173 @@
+@import '../../assets/style/base.scss';
 $timeout: 0.3s;
+$menuItemHeight: 36px;
 
 /deep/ .el-menu {
   border-right: none;
-}
+  padding-left: 0;
+  box-sizing: border-box;
 
+  .el-menu-item {
+    height: $menuItemHeight;
+    line-height: $menuItemHeight;
+    margin-bottom: 8px;
+    color: #bfbfbf;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    padding: 0 16px 0 24px !important;
+    .iconfont {
+      font-size: 16px !important;
+      width: 16px;
+      margin-right: 8px;
+      text-align: center;
+      display: inline-block;
+      color: #bfbfbf;
+    }
+    .icon-img {
+      width: 16px;
+      text-align: center;
+      line-height: 14px;
+      display: inline-block;
+      margin-right: 8px;
+      img {
+        width: 16px;
+        height: 16px;
+        overflow: hidden;
+        vertical-align: -3px;
+        display: inline-block;
+      }
+    }
+    .el-icon-menu {
+      font-size: 14px;
+    }
+  }
+  .el-submenu {
+    margin-bottom: 8px;
+    .icon-img {
+      width: 16px;
+      // text-align: center;
+      // line-height: 14px;
+      // display: inline-block;
+      // margin-right: 8px;
+      img {
+        width: 16px;
+        height: 16px;
+        // overflow: hidden;
+        // vertical-align: -3px;
+        // display: inline-block;
+      }
+    }
+  }
+  .el-submenu__title>.icon-img {
+    margin-right: 8px;
+  }
+}
+/deep/ .el-submenu__title {
+  height: $menuItemHeight;
+  line-height: $menuItemHeight;
+  padding-left: 24px !important;
+  .iconfont {
+    font-size: 16px !important;
+    margin-right: 8px;
+    text-align: center;
+    width: 16px;
+    display: inline-block;
+    color: #bfbfbf;
+  }
+  .el-icon-menu {
+    font-size: 14px;
+  }
+  .el-submenu__icon-arrow {
+    // right: auto;
+    right: 16px;
+    font-size: 14px;
+    // &::before {
+    //   content: '\e790' !important;
+    // }
+  }
+}
 /deep/ .el-submenu__title:hover {
-  background-color: #1890ff !important;
-
+  background-color: #151d32 !important;
+}
+/deep/ .el-menu--inline {
+  padding: 0 !important;
+  background-color: #151d32 !important;
+  .el-menu-item {
+    background-color: #151d32 !important;
+    padding-left: 38px !important;
+    .iconfont {
+      color: #bfbfbf !important;
+    }
+    span {
+      color: #bfbfbf !important;
+    }
+  }
 }
 
-/deep/.el-menu-item:hover {
-  background-color: #1890ff !important;
-
+/deep/.el-menu-item:hover,
+.el-menu--popup .el-menu-item:hover {
+  background-color: #3171f2 !important;
+  color: white !important;
+  .iconfont,
+  span {
+    color: white !important;
+  }
 }
-
-/deep/.el-menu-item.is-active {
-  background-color: #1890ff !important;
+/deep/.el-menu-item.is-active,
+.el-menu--popup .el-menu-item.is-active {
+  background-color: #3171f2 !important;
+  .iconfont,
+  span {
+    color: white !important;
+  }
 }
-
 .app-scrollbar:not(.el-menu-collapse) {
-  width: 230px;
+  width: 100%;
   transition: width $timeout;
 }
-
 .app-scrollbar.el-menu-collapse {
-  width: 60px;
+  width: 47px;
   transition: width $timeout;
 }
-
 .menu-collapse:not(.el-menu--collapse) {
   width: 100%;
   transition: width $timeout;
 }
-
 .app-scrollbar {
-  height: 100%;
+  height: calc(100% - 44px);
   position: relative;
-  background-color: #001529;
-
+  background-color: #1c263d;
   /deep/.el-scrollbar__wrap {
     overflow-x: hidden;
   }
+}
 
-  .is-collapse {
-    color: #fff;
-    font-size: 25px;
-    position: absolute;
-    bottom: 20px;
-    right: 10px;
-    cursor: pointer;
+.el-menu-collapse {
+  .el-menu {
+    padding-left: 0;
   }
+  /deep/.el-tooltip {
+    padding: 0 16px !important;
+  }
+  /deep/.el-submenu__title {
+    padding-left: 16px !important;
+  }
+}
+.el-menu--vertical {
+  .el-menu-item {
+    .iconfont {
+      color: #bfbfbf;
+    }
+    span {
+      padding-left: 8px;
+      color: #bfbfbf;
+    }
+  }
+}
+/deep/.el-submenu .el-submenu .el-submenu__title {
+  padding-left: 38px !important;
+}
+/deep/.el-submenu .el-submenu .el-menu--inline .el-menu-item {
+  padding-left: 55px !important;
 }

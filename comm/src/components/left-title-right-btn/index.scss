@@ -1,0 +1,9 @@
+.left-title-right-btn {
+  display: flex;
+  justify-content: space-between;
+  h4 {
+    @include fz(16px);
+    font-weight: $fontWeight;
+    margin: 0 0 16px 0;
+  }
+}

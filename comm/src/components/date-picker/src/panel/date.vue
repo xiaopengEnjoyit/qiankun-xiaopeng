@@ -31,7 +31,7 @@
                 :placeholder="t('el.datepicker.selectDate')"
                 :value="visibleDate"
                 size="small"
-                @input="(val) => (userInputDate = val)"
+                @input="val => (userInputDate = val)"
                 @change="handleVisibleDateChange"
               />
             </span>
@@ -42,7 +42,7 @@
                 :placeholder="t('el.datepicker.selectTime')"
                 :value="visibleTime"
                 size="small"
-                @input="(val) => (userInputTime = val)"
+                @input="val => (userInputTime = val)"
                 @change="handleVisibleTimeChange"
               />
               <time-picker
@@ -185,7 +185,7 @@ export default {
     showTime(val) {
       /* istanbul ignore if */
       if (!val) return
-      this.$nextTick((_) => {
+      this.$nextTick(_ => {
         const inputElm = this.$refs.input.$el
         if (inputElm) {
           this.pickerWidth = inputElm.getBoundingClientRect().width + 10
@@ -226,16 +226,16 @@ export default {
 
   methods: {
     proxyTimePickerDataProperties() {
-      const format = (timeFormat) => {
+      const format = timeFormat => {
         this.$refs.timepicker.format = timeFormat
       }
-      const value = (value) => {
+      const value = value => {
         this.$refs.timepicker.value = value
       }
-      const date = (date) => {
+      const date = date => {
         this.$refs.timepicker.date = date
       }
-      const selectableRange = (selectableRange) => {
+      const selectableRange = selectableRange => {
         this.$refs.timepicker.selectableRange = selectableRange
       }
 
@@ -258,7 +258,7 @@ export default {
       if (!value) {
         this.$emit('pick', value, ...args)
       } else if (Array.isArray(value)) {
-        const dates = value.map((date) => (this.showTime ? clearMilliseconds(date) : clearTime(date)))
+        const dates = value.map(date => (this.showTime ? clearMilliseconds(date) : clearTime(date)))
         this.$emit('pick', dates, ...args)
       } else {
         this.$emit('pick', this.showTime ? clearMilliseconds(value) : clearTime(value), ...args)
@@ -630,7 +630,7 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-.el-picker-panel__shortcut{
+.el-picker-panel__shortcut {
   text-align: center !important;
 }
 </style>

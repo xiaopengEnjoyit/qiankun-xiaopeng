@@ -1,0 +1,59 @@
+@import '../../assets/style/base.scss';
+.cont-title {
+  .title {
+    margin: 0;
+    padding: 0 16px 16px 0;
+    font-size: 16px;
+    height: 22px;
+    line-height: 22px;
+    font-weight: 500;
+  }
+  .crumb {
+    padding-bottom: 8px;
+    font-size: 16px;
+    height: 22px;
+    line-height: 22px;
+    &-back {
+      font-size: 14px;
+      color: $activeColor;
+      padding-right: 12px;
+      margin-right: 12px;
+      border-right: 1px solid $borderColor;
+      cursor: pointer;
+      float: left;
+      .iconfont {
+        font-size: 14px;
+        padding-right: 4px;
+      }
+      &:hover {
+        color: $hoverColor;
+      }
+    }
+    &-list {
+      float: left;
+      /deep/ .el-breadcrumb {
+        line-height: 22px;
+        .el-breadcrumb__item {
+          .el-breadcrumb__inner {
+            color: $SecondaryTextColor;
+          }
+          &:last-child {
+            .el-breadcrumb__inner {
+              color: #262626;
+            }
+          }
+        }
+        .el-breadcrumb__separator {
+          margin: 0 4px;
+          font-weight: 500;
+          color: #8c8c8c;
+        }
+      }
+
+      a {
+        color: $SecondaryTextColor;
+      }
+    }
+    @include clearfix();
+  }
+}

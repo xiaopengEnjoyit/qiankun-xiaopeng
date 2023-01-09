@@ -1,27 +1,106 @@
 .table-wrap {
   height: 100%;
-  &-dropdown{
+
+  &-dropdown {
     margin-left: 10px;
+    font-size: 12px;
   }
 }
-.v-pager {
-  padding: 5px;
-  text-align: right;
-  margin-top: 20px;
+
+/deep/ .el-table {
+  color: $textMainColor;
+
+  thead {
+    color: $SecondaryTextColor;
+  }
 }
-//局部样式.demo是类名 是el-table标签上的自定义class
-/deep/.el-table__body-wrapper::-webkit-scrollbar {
-  width: 7px;
-  height: 7px;
-}
-/deep/.el-table__body-wrapper::-webkit-scrollbar-thumb {
-  background-color: #a1a3a9;
-  border-radius: 3px;
-}
+
 .el-dropdown-link {
   cursor: pointer;
-  color: #409eff;
+  color: #3171f2;
 }
+
 .el-icon-arrow-down {
   font-size: 12px;
+}
+
+/deep/.el-table td {
+  padding: 0;
+  font-size: 12px;
+
+  /deep/ .el-button {
+    font-size: 12px !important;
+    font-weight: 400;
+  }
+}
+
+/deep/.el-table th {
+  padding: 0;
+  height: 34px;
+  line-height: 34px;
+  font-size: 12px;
+  background: rgb(249, 249, 249); //加背景色原因是最后一个th会没有背景色，导致滚动条感觉在表格外面
+}
+
+/deep/.el-button--text {
+  &:hover {
+    text-decoration: underline;
+  }
+
+  span {
+    font-size: 12px;
+  }
+}
+
+/deep/.el-button.is-disabled.el-button--text {
+  &:hover {
+    text-decoration: none;
+  }
+}
+
+/deep/.el-table .caret-wrapper {
+  width: 16px;
+}
+
+/deep/.el-table .sort-caret {
+  left: 4px;
+}
+
+/deep/.el-table th>.cell {
+  padding-left: 16px;
+}
+
+/deep/.el-table .cell {
+  padding-left: 16px;
+}
+
+/deep/.v-pager ul li {
+  font-weight: normal;
+}
+
+/deep/.el-table__fixed-right-patch {
+  //表格最后一列，没有背景色，当有纵向滚动条时，会感觉没对齐
+  background-color: rgb(249, 249, 249);
+}
+
+/deep/.el-table .caret-wrapper {
+  height: 31px;
+}
+
+/deep/.el-table .sort-caret.ascending {
+  top: 4px;
+}
+
+/deep/.el-table .sort-caret.descending {
+  bottom: 6px;
+}
+/deep/.el-table td.el-table__cell, .el-table th.el-table__cell.is-leaf {
+  border-bottom-color: #eeeeee;
+}
+/deep/.el-table--border .el-table__cell, .el-table__body-wrapper .el-table--border.is-scrolling-left~.el-table__fixed {
+  border-bottom-color: #eeeeee;
+  border-right-color: #eeeeee;
+}
+/deep/.el-table--border, .el-table--group{
+  border-color: #eeeeee;
 }

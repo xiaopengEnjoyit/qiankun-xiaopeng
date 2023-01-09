@@ -92,9 +92,8 @@
 import { isDate, modifyWithTimeString, prevYear, nextYear, nextMonth } from 'element-ui/src/utils/date-util'
 import Clickoutside from 'element-ui/src/utils/clickoutside'
 import Locale from 'element-ui/src/mixins/locale'
-
-
-const calcDefaultValue = (defaultValue) => {
+import MonthTable from '../basic/month-table'
+const calcDefaultValue = defaultValue => {
   if (Array.isArray(defaultValue)) {
     return [new Date(defaultValue[0]), new Date(defaultValue[1])]
   } else if (defaultValue) {
@@ -288,11 +287,12 @@ export default {
       this.minDate = this.value && isDate(this.value[0]) ? new Date(this.value[0]) : null
       this.maxDate = this.value && isDate(this.value[0]) ? new Date(this.value[1]) : null
     }
-  }
+  },
+  components: { MonthTable }
 }
 </script>
 <style lang="scss" scoped>
-.el-picker-panel__shortcut{
+.el-picker-panel__shortcut {
   text-align: center !important;
 }
 </style>

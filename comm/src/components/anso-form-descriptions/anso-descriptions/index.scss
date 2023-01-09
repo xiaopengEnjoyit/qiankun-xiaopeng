@@ -1,0 +1,29 @@
+/deep/.desc-label-txtr {
+  text-align: right;
+  width: 15%;
+  font-weight: 400;
+}
+.anso-descriptions-item {
+  /deep/.el-descriptions__header {
+    padding: 12px 0;
+    margin: 0;
+    .el-descriptions__title {
+      font-weight: 400;
+    }
+  }
+  /deep/.el-descriptions-row {
+    .el-descriptions-item__content {
+      width: 35%;
+    }
+    .el-input__icon {
+      padding: 0;
+      line-height: 28px;
+    }
+    .red {
+      color: red;
+    }
+    .el-date-editor--daterange {
+      width: 100% !important;
+    }
+  }
+}

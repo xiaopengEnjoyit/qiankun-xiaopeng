@@ -1,6 +1,7 @@
 <script>
 import { modalDrag } from '../../directives'
 import { debounce } from '../../utils'
+import { dealFn } from '../../utils/utils'
 export default {
   name: 'AnsoModal',
   props: {
@@ -133,7 +134,7 @@ export default {
      * @param {*}
      * @return {*}
      */
-    handleSubmit: debounce(function(){
+    handleSubmit: debounce(function() {
       const _instance = this.getInstance()
       if (!_instance) {
         return this.$emit('submit')
@@ -165,9 +166,11 @@ export default {
           ...this.modalConfig
         }}
         visible={this.dialogVisible}
-        onOpened={this.handleOpen}
-        onClose={this.handleClose}
-        on={{ 'update:visible': val => (this.dialogVisible = val) }}
+        on={{
+          'update:visible': val => (this.dialogVisible = val),
+          opened: this.handleOpen,
+          close: this.handleClose
+        }}
       >
         {this.$slots.title ? <template slot="title">{this.$slots.title}</template> : ''}
         <div class="v-modal-body">{this.$slots.default}</div>
@@ -183,7 +186,7 @@ export default {
                   )
                 case 'confirm':
                   return (
-                    <el-button type={item.type} size={item.size} onClick={this.handleSubmit}>
+                    <el-button type={item.type} size={item.size} onClick={dealFn(this.handleSubmit, 1000)}>
                       {item.text}
                     </el-button>
                   )
@@ -194,6 +197,7 @@ export default {
                     <el-button
                       size={item.size}
                       type={item.type}
+                      disabled={item.disabled}
                       nativeOnClick={e => {
                         e.preventDefault()
                         item.method()

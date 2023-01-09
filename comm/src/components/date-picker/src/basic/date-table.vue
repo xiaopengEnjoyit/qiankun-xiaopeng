@@ -65,7 +65,7 @@ export default {
     firstDayOfWeek: {
       default: 7,
       type: Number,
-      validator: (val) => val >= 1 && val <= 7
+      validator: val => val >= 1 && val <= 7
     },
 
     value: {},
@@ -200,7 +200,7 @@ export default {
 
           let cellDate = new Date(time)
           cell.disabled = typeof disabledDate === 'function' && disabledDate(cellDate)
-          cell.selected = arrayFind(selectedDate, (date) => date.getTime() === cellDate.getTime())
+          cell.selected = arrayFind(selectedDate, date => date.getTime() === cellDate.getTime())
           cell.customClass = typeof cellClassName === 'function' && cellClassName(cellDate)
           this.$set(row, this.showWeekNumber ? j + 1 : j, cell)
         }
@@ -273,7 +273,7 @@ export default {
         classes.push(cell.type)
       }
 
-      if (cell.type === 'normal' && defaultValue.some((date) => this.cellMatchesDate(cell, date))) {
+      if (cell.type === 'normal' && defaultValue.some(date => this.cellMatchesDate(cell, date))) {
         classes.push('default')
       }
 
@@ -445,7 +445,7 @@ export default {
       } else if (this.selectionMode === 'dates') {
         const value = this.value || []
         const newValue = cell.selected
-          ? removeFromArray(value, (date) => date.getTime() === newDate.getTime())
+          ? removeFromArray(value, date => date.getTime() === newDate.getTime())
           : [...value, newDate]
         this.$emit('pick', newValue)
       }

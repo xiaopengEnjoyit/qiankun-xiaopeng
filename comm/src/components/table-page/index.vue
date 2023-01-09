@@ -1,7 +1,7 @@
 <script>
 import { tableForm, tableHead, tableTools, ansoTable } from '..'
 export default {
-  name: 'table-page',
+  name: 'TablePage',
   props: {
     formList: {
       type: Array,
@@ -55,7 +55,7 @@ export default {
     pageSizes: {
       type: Array,
       default() {
-        return [20, 40, 50, 100]
+        return [10, 20, 50, 100]
       }
     },
     // 分页布局
@@ -63,10 +63,14 @@ export default {
       type: String,
       default: 'total, sizes, prev, pager, next, jumper'
     },
+    hasPagination: {
+      type: Boolean,
+      default: true
+    },
     //总条数
     total: {
-      type: Number,
-      default: 0
+      type: [Number, String],
+      default: undefined
     },
     headerConfig: {
       type: Object,
@@ -95,9 +99,9 @@ export default {
       type: Object,
       default: () => ({})
     },
-    operatesWidth: {
-      type: String,
-      default: () => ''
+    model: {
+      type: Object,
+      default: () => ({})
     }
   },
   components: {
@@ -108,8 +112,7 @@ export default {
   },
   data() {
     return {
-      cellHeight: 0,
-
+      cellHeight: 40,
       targetColumns: [], // 目标表头
       isPrint: false
     }
@@ -136,6 +139,9 @@ export default {
     // 修改表格行高
     setSpace(h) {
       this.cellHeight = h
+      this.$nextTick(() => {
+        this.$refs.pageTable.$refs.ansoTabel.doLayout()
+      })
     },
     // 获取选中的表头
     setCheckedColumns(columns) {
@@ -143,7 +149,7 @@ export default {
     },
     // execl下载
     handleExport() {
-      console.log(11111)
+      this.$emit('export')
     },
     // 查询
     handleQuery(form) {
@@ -167,6 +173,7 @@ export default {
       labelWidth,
       labelPosition,
       rules,
+      model,
       handleQuery,
       handleReset,
       toolsConfig,
@@ -185,26 +192,35 @@ export default {
       layout,
       pageSizes,
       total,
-      dispatchEvent,
-      operatesWidth
+      hasPagination,
+      dispatchEvent
     } = this
     return (
       <div class="table-page">
+        {/* 表格表单 */}
+        {formList.length ? (
+          <div class="table-page-main-form">
+            <table-form
+              props={{
+                formList,
+                formConfig,
+                itemConfig,
+                labelWidth,
+                labelPosition,
+                rules,
+                model
+              }}
+              ref="tableForm"
+              onQuery={handleQuery}
+              onReset={handleReset}
+            ></table-form>
+          </div>
+        ) : (
+          ''
+        )}
         <div class="table-page-main">
-          {/* 表格按钮 */}
-          {Object.keys(headerConfig).length ? <table-head headerConfig={headerConfig}></table-head> : ''}
-          {/* 表格表单 */}
-          {formList.length ? (
-            <div class="table-page-main-form">
-              <table-form
-                props={{ formList, formConfig, itemConfig, labelWidth, labelPosition, rules }}
-                onQuery={handleQuery}
-                onReset={handleReset}
-              ></table-form>
-            </div>
-          ) : (
-            ''
-          )}
+          {/**表格工具栏上方自定义内容 */}
+          {this.$slots.customHtml}
           {/* 表格工具栏 */}
           {toolsConfig ? (
             <table-tools
@@ -212,8 +228,13 @@ export default {
               onSetSpace={setSpace}
               onSetCheckedColumns={setCheckedColumns}
               onExport={handleExport}
+              onRefresh={() => this.$emit('refresh')}
               printId="print"
-            ></table-tools>
+            >
+              {/* 表格按钮 */}
+              {Object.keys(headerConfig).length ? <table-head headerConfig={headerConfig}></table-head> : ''}
+              {this.$slots.header}
+            </table-tools>
           ) : (
             ''
           )}
@@ -223,6 +244,7 @@ export default {
             <div class="table-page-main-table">
               <anso-table
                 id="print"
+                ref="pageTable"
                 props={{
                   tableData,
                   columns: targetColumns,
@@ -230,28 +252,30 @@ export default {
                   tableConfig,
                   operates,
                   'row-style': { height: cellHeight + 'px' },
-                  operatesWidth,
                   layout,
                   pageSizes,
-                  total
+                  total,
+                  hasPagination
                 }}
                 pageIndex={currentPage}
                 pageSize={limit}
                 on={{
-                  'update:pageIndex': (page) => (this.currentPage = page),
-                  'update:pageSize': (size) => (this.limit = size),
+                  'update:pageIndex': page => (this.currentPage = page),
+                  'update:pageSize': size => (this.limit = size),
                   pagination: dispatchEvent
                 }}
                 scopedSlots={{
-                  default: (scope) => this.$scopedSlots.default(scope)
+                  custom: scope => this.$scopedSlots.custom(scope)
                 }}
-              ></anso-table>
+              >
+                <div>{this.$slots.default}</div>
+              </anso-table>
             </div>
           ) : (
             ''
           )}
-          {this.$slots.default}
         </div>
+        {this.$slots.default}
       </div>
     )
   }

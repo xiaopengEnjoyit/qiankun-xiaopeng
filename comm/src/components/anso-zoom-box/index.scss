@@ -1,0 +1,13 @@
+.zoom-box {
+  position: relative;
+  box-sizing: border-box;
+  &-tools {
+    z-index: 99;
+    position: absolute;
+    margin: 0;
+    padding: 0;
+    &:hover {
+      background: rgba(110, 110, 110, 0.1);
+    }
+  }
+}

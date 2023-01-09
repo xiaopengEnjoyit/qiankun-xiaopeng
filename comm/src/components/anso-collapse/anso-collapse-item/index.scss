@@ -1,0 +1,38 @@
+/deep/.el-collaps {
+}
+.anso-collapse-item {
+  margin-bottom: 8px;
+  /deep/.el-collapse-item__header {
+    height: 40px;
+    line-height: 40px;
+    background-color: #f4f5f8;
+    .el-collapse-item__arrow {
+      &:before {
+        content: '\e791' !important;
+      }
+    }
+    border-bottom: none;
+  }
+  .anso-collapse-title {
+    padding-left: 12px;
+    display: flex;
+    height: 40px;
+    line-height: 40px;
+    width: 100%;
+    justify-content: space-between;
+    border: none;
+    &-tips {
+      color: #8c8c8c;
+    }
+  }
+  /deep/.el-collapse-item__wrap {
+    border-bottom: none;
+  }
+  /deep/.el-collapse-item__arrow {
+    color: #8c8c8c;
+    transform: rotate(90deg);
+    &.is-active {
+      transform: rotate(-90deg);
+    }
+  }
+}

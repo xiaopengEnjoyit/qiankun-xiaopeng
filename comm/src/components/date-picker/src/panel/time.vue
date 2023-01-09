@@ -61,7 +61,7 @@ export default {
 
       this.date = date
       if (this.visible && this.needInitAdjust) {
-        this.$nextTick((_) => this.adjustSpinners())
+        this.$nextTick(_ => this.adjustSpinners())
         this.needInitAdjust = false
       }
     },

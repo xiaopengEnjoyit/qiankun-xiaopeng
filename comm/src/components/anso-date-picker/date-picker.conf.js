@@ -57,37 +57,37 @@ export const PICKER_OPTIONS = {
     {
       text: '过去7天',
       onClick(picker) {
-        useIntervalDays(picker, 7, 'day')
+        useIntervalDays(picker, 6, 'day')
       }
     },
     {
       text: '过去14天',
       onClick(picker) {
-        useIntervalDays(picker, 14, 'day')
+        useIntervalDays(picker, 13, 'day')
       }
     },
     {
       text: '过去30天',
       onClick(picker) {
-        useIntervalDays(picker, 30, 'day')
+        useIntervalDays(picker, 29, 'day')
       }
     },
     {
       text: '过去60天',
       onClick(picker) {
-        useIntervalDays(picker, 60, 'day')
+        useIntervalDays(picker, 59, 'day')
       }
     },
     {
       text: '过去90天',
       onClick(picker) {
-        useIntervalDays(picker, 90, 'day')
+        useIntervalDays(picker, 89, 'day')
       }
     },
     {
       text: '过去180天',
       onClick(picker) {
-        useIntervalDays(picker, 180, 'day')
+        useIntervalDays(picker, 179, 'day')
       }
     }
   ]

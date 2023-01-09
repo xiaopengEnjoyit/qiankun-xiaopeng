@@ -48,10 +48,10 @@ import { hasClass } from 'element-ui/src/utils/dom'
 import { isDate, range, nextDate, getDayCountOfYear } from 'element-ui/src/utils/date-util'
 import { arrayFindIndex, coerceTruthyValueToArray } from 'element-ui/src/utils/util'
 
-const datesInYear = (year) => {
+const datesInYear = year => {
   const numOfDays = getDayCountOfYear(year)
   const firstDay = new Date(year, 0, 1)
-  return range(numOfDays).map((n) => nextDate(firstDay, n))
+  return range(numOfDays).map(n => nextDate(firstDay, n))
 }
 
 export default {
@@ -79,7 +79,7 @@ export default {
       const today = new Date()
 
       style.disabled = typeof this.disabledDate === 'function' ? datesInYear(year).every(this.disabledDate) : false
-      style.current = arrayFindIndex(coerceTruthyValueToArray(this.value), (date) => date.getFullYear() === year) >= 0
+      style.current = arrayFindIndex(coerceTruthyValueToArray(this.value), date => date.getFullYear() === year) >= 0
       style.today = today.getFullYear() === year
       style.default = this.defaultValue && this.defaultValue.getFullYear() === year
 

@@ -1,0 +1,51 @@
+.change-wray {
+  width: 100%;
+  margin-bottom: 12px;
+  height: 394px;
+  display: flex;
+  &-left {
+    border-right: 1px solid $borderColor;
+    height: 100%;
+    overflow-y: auto;
+    /deep/ .icon-wrap {
+      display: none;
+    }
+    &-item {
+      padding-right: 5px;
+    }
+    /deep/.anso-tree {
+      padding: 0 16px 0 0;
+      .el-tree {
+        height: calc(100% - 80px);
+        width: 226px;
+        overflow: hidden;
+        box-sizing: border-box;
+        .el-tree {
+          .el-tree-node {
+            display: block;
+          }
+        }
+      }
+    }
+  }
+  &-right {
+    min-width: 0;
+    flex: 1;
+    padding-left: 12px;
+    &-top {
+      margin-bottom: 12px;
+    }
+    .org-choose-list {
+      border: 1px solid $borderColor;
+      width: 100%;
+      height: 357px;
+      box-sizing: border-box;
+      padding: 12px;
+      @include border-radius();
+      /deep/.el-tree-node__label {
+        color: #8c8c8c;
+        font-size: 12px;
+      }
+    }
+  }
+}

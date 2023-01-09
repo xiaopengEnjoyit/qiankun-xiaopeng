@@ -21,10 +21,10 @@ import { arrayFindIndex, coerceTruthyValueToArray, arrayFind } from 'element-ui/
 const datesInMonth = (year, month) => {
   const numOfDays = getDayCountOfMonth(year, month)
   const firstDay = new Date(year, month, 1)
-  return range(numOfDays).map((n) => nextDate(firstDay, n))
+  return range(numOfDays).map(n => nextDate(firstDay, n))
 }
 
-const clearDate = (date) => {
+const clearDate = date => {
   return new Date(date.getFullYear(), date.getMonth())
 }
 
@@ -113,10 +113,10 @@ export default {
       style.current =
         arrayFindIndex(
           coerceTruthyValueToArray(this.value),
-          (date) => date.getFullYear() === year && date.getMonth() === month
+          date => date.getFullYear() === year && date.getMonth() === month
         ) >= 0
       style.today = today.getFullYear() === year && today.getMonth() === month
-      style.default = defaultValue.some((date) => this.cellMatchesDate(cell, date))
+      style.default = defaultValue.some(date => this.cellMatchesDate(cell, date))
 
       if (cell.inRange) {
         style['in-range'] = true
@@ -248,7 +248,7 @@ export default {
           cell.text = index
           let cellDate = new Date(time)
           cell.disabled = typeof disabledDate === 'function' && disabledDate(cellDate)
-          cell.selected = arrayFind(selectedDate, (date) => date.getTime() === cellDate.getTime())
+          cell.selected = arrayFind(selectedDate, date => date.getTime() === cellDate.getTime())
 
           this.$set(row, j, cell)
         }

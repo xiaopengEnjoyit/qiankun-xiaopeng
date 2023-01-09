@@ -1,0 +1,26 @@
+@import '../../assets/style/base';
+.page-info {
+  padding-bottom: 16px;
+  h4 {
+    margin: 0;
+    height: 24px;
+    font-weight: 500;
+    @include fz(16px);
+  }
+  &-tips {
+    margin-top: 8px;
+    @include fz(12px);
+    color: #8c8c8c;
+    &-id {
+      color: $textMainColor;
+    }
+    a {
+      display: inline-block;
+      margin-left: 12px;
+      color: $activeColor;
+      &:hover {
+        color: $hoverColor;
+      }
+    }
+  }
+}

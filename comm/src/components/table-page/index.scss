@@ -1,31 +1,81 @@
 .table-page {
-  height: calc(100vh - 114px);
+  background-color: #F8F9FA;
+  height: 100%;
   display: flex;
   flex: 1;
   flex-direction: column;
   overflow: hidden;
+
   &-main {
     background-color: #fff;
-    padding: 10px;
+    padding: 0 24px 0 24px;
     flex: 1;
     display: flex;
     flex-direction: column;
     overflow-y: auto;
-    &-form{
-      margin-top: 6px;
+    overflow-x: hidden;
+
+    &-form {
+      background-color: #fff;
+      padding: 16px 24px;
+      margin-bottom: 8px;
+
+      // 修改表格上面表单样式
+      /deep/.el-input {
+        width: 152px;
+      }
+
+      /deep/ .el-input.el-input--prefix .el-input__inner {
+        padding-left: 24px;
+        padding-right: 20px;
+      }
+
+      /deep/.el-input .el-input__icon {
+        height: 28px;
+        line-height: 28px;
+        width: 20px;
+        font-size: 12px;
+      }
+
+      // /deep/.el-input .el-input__suffix {
+      //   .el-icon-circle-close {
+      //     margin-right: -1px;
+      //   }
+      // }
+      /deep/.el-date-editor--date {
+        display: inline-block !important;
+        .el-input__prefix .el-input__icon {
+          padding: 0;
+        }
+      }
+      /deep/.el-date-editor {
+        .el-range-separator {
+          font-size: 12px;
+        }
+      }
+
+      /deep/.el-select .el-input .el-input__inner {
+        width: 152px;
+      }
+      /deep/.el-cascader {
+        line-height: 34px;
+      }
+
+      // /deep/.el-select .el-select__caret {
+      //   margin-right: -1px;
+      // }
+
+      // /deep/.el-select .el-input__suffix {
+      //   .el-icon-circle-close {
+      //     margin-right: -1px;
+      //   }
+      // }
     }
+
     &-table {
       flex: 1;
       overflow-y: auto;
+      // min-width: 900px; //去掉这里是为了解决小屏幕时，表格右边距没有了的问题
     }
   }
-}
-
-/deep/ .el-table td {
-  padding: 4px;
-}
-
-/deep/ .el-table th {
-  padding: 0;
-  height: 34px;
 }

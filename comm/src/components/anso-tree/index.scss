@@ -1,5 +1,7 @@
+@import '../../assets/style/base.scss';
 .anso-tree-wrap {
   height: 100%;
+  flex-shrink: 0;
   overflow: hidden;
   transition: all 0.3s;
   position: relative;
@@ -38,31 +40,60 @@
     }
   }
 
+  .anso-tree-select {
+    padding-bottom: 10px;
+
+    /deep/ .el-select {
+      width: 100%;
+
+      .el-select__caret {
+        line-height: 28px;
+      }
+    }
+  }
+
   .anso-tree {
     height: 100%;
     background-color: #fff;
-    padding: 16px 10px;
+    padding: 24px 16px;
     box-sizing: border-box;
     transition: all 0.3s;
+    flex-direction: column;
 
     &-search {
-      padding-top: 8px;
+      // padding-top: 8px;
       display: flex;
+
+      /deep/ .el-input__icon {
+        line-height: 30px;
+      }
+
+      .inline-input {
+        /deep/ .el-input {
+          width: 100%;
+        }
+      }
 
       .plus {
         margin-left: 8px;
-        padding: 7px !important;
+        width: 28px;
+        height: 28px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
       }
     }
 
     .tree {
       height: calc(100% - 101px);
       overflow-y: auto;
-      // @include special-scroll();
+      @include special-scroll(4px, 4px, #ccc, #666, #fff);
     }
 
     &-title {
-      padding: 16px;
+      padding: 16px 0 7px 0;
+      font-size: 15px;
+      font-weight: 600;
     }
 
     .custom-tree-node:hover > .custom-tree-node-tool {
@@ -74,17 +105,23 @@
       overflow: hidden;
       display: flex;
       align-items: center;
+      padding-left: 5px;
       padding-right: 10px;
-      font-family: PingFangSC, PingFangSC-Regular;
-      font-size: 14px;
+      font-size: 12px;
       color: #8c8c8c;
+
       &-label {
         display: block;
-        width: 70% !important;
+        max-width: 70% !important;
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;
       }
+
+      &-type {
+        color: $mainColor;
+      }
+
       &.is_disabled {
         cursor: not-allowed;
         color: #ccc;
@@ -94,13 +131,18 @@
         color: #8c8c8c;
         position: absolute;
         right: 10px;
-        display: none;
 
-        em {
+        .el-button {
+          color: #8c8c8c;
           margin-left: 5px;
+
           &:hover {
             color: #3f71f2;
           }
+        }
+        .el-icon-more {
+          color: #3f71f2;
+          transform: rotate(90deg);
         }
       }
 
@@ -109,16 +151,56 @@
       }
     }
   }
+
+  .node-content {
+    display: flex;
+    width: 100%;
+    align-items: center;
+
+    .custom-tree-node {
+      flex: 1;
+    }
+  }
 }
 
 /deep/ .el-input__inner {
   height: 28px;
 }
 
-/deep/.el-tree-node.is-current>.el-tree-node__content>.custom-tree-node {
-  color: #4981f4 !important;
+/deep/.el-tree-node.is-current > .el-tree-node__content > .custom-tree-node {
+  color: $mainColor !important;
 }
 
-/deep/.el-tree-node.is-current>.el-tree-node__content>.custom-tree-node.is_disabled {
+/deep/.el-tree-node.is-current > .el-tree-node__content > .custom-tree-node.is_disabled {
   color: #ccc !important;
+}
+
+/*拖拽样式*/
+/deep/ .el-tree__drop-indicator {
+  // background-color: #3171f2;
+  border: 1px dashed $mainColor;
+  // box-shadow: 2px 2px 3px #06f;
+}
+
+/deep/.el-tree-node__content > .el-tree-node__expand-icon {
+  padding: 4px;
+}
+
+/deep/ .tree-drag-icon .el-tree-node__content::before {
+  font-family: 'iconfont';
+  content: '\e608';
+  font-size: 14px;
+  color: #bfbfbf;
+}
+
+/deep/.el-tree-node__content:hover.el-tree-node__content::before {
+  color: $mainColor;
+}
+/deep/.el-tree div[aria-disabled='true'] > .el-tree-node__content::before {
+  color: #ccc !important;
+}
+/*解决不显示横向滚动条问题*/
+/deep/.el-tree > .el-tree-node {
+  display: inline-block;
+  min-width: 100%;
 }

@@ -6,17 +6,27 @@
  */
 export default {
   name: 'AnsoButton',
+  data() {
+    return {
+      metaInfo: this.$route?.meta
+    }
+  },
   methods: {
     /**
      * @description: 校验按钮权限是否存在
      * @param {*} permission 权限
      * @return {*} boolean
      */
-    isPermission(permission) {
-      // const { btnTabInfo } = this.$route?.meta
-      // const hasPermission = btnTabInfo.some(p => p.funcCode === permission)
-      const s = true
-      if (s) {
+    isPermission() {
+      const { btnTabInfo } = this.metaInfo
+      const { permission } = this.$attrs
+      // IOT:140011
+      const permissionList = btnTabInfo || []
+      let hasPermission = permissionList.some(p => p.funcCode === permission)
+      if (permission === undefined) {
+        hasPermission = true
+      }
+      if (hasPermission) {
         return (
           <el-button attrs={this.$attrs} on={this.$listeners}>
             {this.$slots.default}
@@ -26,7 +36,7 @@ export default {
     }
   },
   render() {
-    return this.isPermission(this.$attrs.permission)
+    return this.isPermission()
   }
 }
 </script>

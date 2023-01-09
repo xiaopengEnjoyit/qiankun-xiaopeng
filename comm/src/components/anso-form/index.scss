@@ -3,54 +3,33 @@
   height: 100%;
 
   &-row {
-    width: 100%;
+    // width: 100%;
     flex-wrap: wrap;
     box-sizing: border-box;
   }
 
   /deep/.el-form-item__label {
-    color: #8c8c8c;
+    color: #626262;
     display: flex;
-    line-height:0;
-    padding-top: 10px;
-  }
-
-  .label-wrap {
-    display: flex;
-    position: relative;
-  }
-
-  .icon {
-    position: absolute;
-    color: #8c8c8c;
-    cursor: pointer;
-  }
-
-  /deep/ .el-form-item.is-required {
-    .icon {
-      right: -30px;
-    }
-  }
-
-  /deep/ .el-form-item {
-    .icon {
-      right: -20px;
-    }
+    line-height: 0;
+    padding: 10px 0;
+    margin-bottom: 5px;
   }
 
   /deep/.el-form-item__content {
     margin-left: 0 !important;
     line-height: 32px !important;
+    width: 100%;
   }
 
-  /deep/ .el-input--small .el-input__inner {
-    height: 28px;
-    line-height: 28px;
-    color: #262626 !important;
-  }
+  // /deep/ .el-input--small .el-input__inner {
+  //   height: 28px;
+  //   line-height: 28px;
+  //   color: #262626 !important;
+  // }
 
   /deep/.el-form-item {
-    margin-bottom: 20px;
+    margin-bottom: 16px;
     width: 100%;
   }
 
@@ -58,4 +37,11 @@
     width: 100%;
   }
 
+  /deep/.el-select .el-input .el-select__caret {
+    font-size: 12px;
+  }
+
+  /deep/.el-input__icon {
+    line-height: 32px;
+  }
 }

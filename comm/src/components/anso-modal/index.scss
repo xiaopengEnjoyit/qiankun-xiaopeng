@@ -1,13 +1,109 @@
-.v-modal-body {
-  max-height: 600px;
-  overflow-y: auto;
+.el-message-box--center .el-message-box__header {
+  padding: 0 !important;
+  display: flex;
+  justify-content: space-between;
+
+  >.el-message-box__headerbtn {
+    position: static;
+  }
+
 }
 
-/deep/.el-dialog__header {
-  border-bottom:1px solid rgba(0,0,0,0.09) ;
-
+/deep/.anso-dialog.el-dialog {
+  max-height: 580px !important;
 }
 
 /deep/.el-dialog__body {
-  padding: 16px;
+  max-height: 465px !important;
+  box-sizing: border-box;
+  overflow-y: auto !important;
 }
+
+.el-message-box--center {
+  padding: 15px !important;
+  text-align: right;
+
+  .el-message-box__content {
+    text-align: left !important;
+  }
+
+  .el-message-box__btns {
+    text-align: right !important;
+  }
+}
+
+.btn-primary {
+  background-color: #3171f2 !important;
+  border-color: #3171f2 !important;
+}
+
+.btn-error {
+  background-color: #ff4d4f !important;
+  border-color: #ff4d4f !important;
+}
+
+.anso-confirm {
+  .el-message-box__content {
+    text-align: left !important;
+  }
+
+  .el-message-box__status::before {
+    font-size: 25px !important;
+    color: #3171f2;
+  }
+
+  &-error {
+    .el-message-box__status::before {
+      font-size: 25px !important;
+      color: #ff4d4f;
+    }
+  }
+
+  &-success {
+    .el-message-box__status::before {
+      font-size: 25px !important;
+      color: #52c41a;
+    }
+  }
+
+  &-body {
+    &-title {
+      padding: 10px 5px;
+      display: flex;
+      justify-content: space-between;
+
+      .close {
+        cursor: pointer;
+        font-size: 16px;
+      }
+    }
+  }
+}
+
+/**
+ * @description: 设为16px 9px是因为表单有部分自己的padding和margin（共15px），使用24会导致边距过多。
+ * @param {*}
+ * @return {*}
+ */
+/deep/.el-dialog__body {
+  padding: 16px 24px;
+}
+
+/deep/.el-dialog__header {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.09);
+}
+
+/deep/.el-input .el-input__inner {
+  height: 30px;
+  line-height: 30px;
+}
+
+/deep/.el-dialog__title {
+  font-size: 16px;
+  font-weight: 500;
+  color: #262626;
+}
+
+// /deep/ .el-row{
+//   padding: 0;
+// }
